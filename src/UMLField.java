@@ -1,8 +1,8 @@
 public class UMLField {
 
-    private String dataType;
-    private String name;
-    private String encapsulation;
+    private final String dataType;
+    private final String name;
+    private final String encapsulation;
 
     private boolean valid;
 

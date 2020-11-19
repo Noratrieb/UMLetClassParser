@@ -2,20 +2,12 @@ import java.util.ArrayList;
 
 public class UMLMethod {
 
-    private String returnType;
-    private String name;
-    private String encapsulation;
+    private final String returnType;
+    private final String name;
+    private final String encapsulation;
 
     private ArrayList<String> argsNames = new ArrayList<>();
     private ArrayList<String> argsTypes = new ArrayList<>();
-
-    public UMLMethod(String encapsulation, String returnType, String name, ArrayList<String> argsNames, ArrayList<String> argsTypes) {
-        this.returnType = returnType;
-        this.name = name;
-        this.argsNames = argsNames;
-        this.argsTypes = argsTypes;
-        this.encapsulation = encapsulation;
-    }
 
     public UMLMethod(String line, String className) {
 

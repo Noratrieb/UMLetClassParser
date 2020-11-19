@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class UMLClass {
 
-    private String name;
-    private String packageString;
+    private final String name;
+    private final String packageString;
 
-    private ArrayList<UMLField> fields = new ArrayList<>();
-    private ArrayList<UMLMethod> methods = new ArrayList<>();
+    private final ArrayList<UMLField> fields = new ArrayList<>();
+    private final ArrayList<UMLMethod> methods = new ArrayList<>();
 
     public UMLClass(String classDiagram, String packageString) {
 
