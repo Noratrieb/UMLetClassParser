@@ -11,6 +11,7 @@ public class UMLClassView {
     private JTextArea outputArea;
     private JTextField pathField;
     private JButton convertFileButton;
+    private JTextField packagePathField;
 
     private UMLManager manager;
 
@@ -20,7 +21,7 @@ public class UMLClassView {
         convertButton.addActionListener(e -> {
             String text = inputArea.getText();
 
-            UMLClass umlClass = new UMLClass(text);
+            UMLClass umlClass = new UMLClass(text, "");
 
             outputArea.setText(umlClass.toString());
         });
@@ -29,7 +30,7 @@ public class UMLClassView {
             @Override
             public void keyPressed(KeyEvent e) {
                 String text = inputArea.getText();
-                UMLClass umlClass = new UMLClass(text);
+                UMLClass umlClass = new UMLClass(text, "");
                 outputArea.setText(umlClass.toString());
             }
         });
@@ -38,8 +39,9 @@ public class UMLClassView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String path = pathField.getText();
+                String packagePath = packagePathField.getText();
                 XMLParser parser = new XMLParser(path);
-                manager.parseClasses(parser.getClassesText());
+                manager.parseClasses(parser.getClassesText(), packagePath);
             }
         });
     }

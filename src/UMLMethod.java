@@ -29,7 +29,7 @@ public class UMLMethod {
          * name;
          * args in the UML format
          */
-        String formatted = line.replaceAll("([+\\-~#]) (.+)\\((.*: .*,?)?\\):? ?(.+)?", "$1;$4;$2;$3");
+        String formatted = line.replaceAll("([+\\-~#]) ?(.+)\\((.*: .*,?)?\\):? ?(.+)?", "$1;$4;$2;$3");
         String[] parts = formatted.split(";");
         this.encapsulation = switch (parts[0]) {
             case "+" -> "public ";
