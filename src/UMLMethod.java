@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class UMLMethod {
 
@@ -29,7 +28,7 @@ public class UMLMethod {
          * name;
          * args in the UML format
          */
-        String formatted = line.replaceAll("([+\\-~#]) ?(.+)\\((.*: .*,?)?\\):? ?(.+)?", "$1;$4;$2;$3");
+        String formatted = line.replaceAll(Regex.METHOD_FIND_REGEX, "$1;$4;$2;$3");
         String[] parts = formatted.split(";");
         this.encapsulation = switch (parts[0]) {
             case "+" -> "public ";
@@ -53,10 +52,12 @@ public class UMLMethod {
             String[] argsSplit = args.split(",");
 
             for (String s : argsSplit) {
-                String argFormatted = s.replaceAll(" ?(.*): (.*)", "$1;$2");
-                String[] formattedSplit = argFormatted.split(";");
-                argsNames.add(formattedSplit[0]);
-                argsTypes.add(formattedSplit[1]);
+                if(s.matches(Regex.ARG_SPLIT_REGEX)) {
+                    String argFormatted = s.replaceAll(Regex.ARG_SPLIT_REGEX, "$1;$2");
+                    String[] formattedSplit = argFormatted.split(";");
+                    argsNames.add(formattedSplit[0]);
+                    argsTypes.add(formattedSplit[1]);
+                }
             }
         }
     }

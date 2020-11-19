@@ -21,9 +21,9 @@ public class UMLClass {
 
         for (String line : linesBeheaded) {
             if(line != null) {
-                if (line.matches("([+\\-~#]) ?(.+)\\((.*: .*,?)?\\):? ?(.+)?")) {  //MATCHES METHOD
+                if (line.matches(Regex.METHOD_FIND_REGEX)) {  //MATCHES METHOD
                     methods.add(new UMLMethod(line, name));
-                } else if (line.matches("([+\\-~#]) ?((?:[a-z]|[A-Z]|[0-1])+): (.*)")) { //MATCHES FIELD
+                } else if (line.matches(Regex.FIELD_FIND_REGEX)) { //MATCHES FIELD
                     fields.add(new UMLField(line));
                 }
             }
