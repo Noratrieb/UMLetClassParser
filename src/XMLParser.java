@@ -9,25 +9,31 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class Main {
+public class XMLParser {
 
-    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
+    private Document doc;
 
-        String path = "C:\\Users\\nilsh\\Desktop\\Umlet/test.uxf";
+    public XMLParser(String path) {
+        try {
+            File inputFile = new File(path);
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            doc = builder.parse(inputFile);
+        } catch (ParserConfigurationException | SAXException | IOException e){
+            e.printStackTrace();
+        }
+    }
 
-        File inputFile = new File(path);
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse(inputFile);
-        System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
-        System.out.println("---------");
+    public ArrayList<String> getClassesText(){
+
+        ArrayList<String> classes = new ArrayList<>();
 
         NodeList nList = doc.getDocumentElement().getElementsByTagName("element");
 
         for (int i = 0; i < nList.getLength(); i++) {
             Node node = nList.item(i);
-            System.out.println("Current Element: " + node.getNodeName());
 
             if (node.getNodeType() == Node.ELEMENT_NODE){
 
@@ -35,13 +41,13 @@ public class Main {
 
                 if(element.getElementsByTagName("id").item(0).getTextContent().equals("UMLClass")){
 
-                    System.out.println("class");
+                    String classBody = element.getElementsByTagName("panel_attributes").item(0).getTextContent();
+                    classes.add(classBody);
 
                 }
-
             }
         }
 
+        return classes;
     }
-
 }

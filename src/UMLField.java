@@ -20,7 +20,6 @@ public class UMLField {
     public UMLField(String line) {
 
         String formatted = line.replaceAll("([+\\-~#]) ((?:[a-z]|[A-Z]|[0-1])+): (.*)", "$1;$3;$2");
-        System.out.println(formatted);
         String[] formattedSplit = formatted.split(";");
 
         this.encapsulation = switch (formattedSplit[0]) {
