@@ -51,5 +51,4 @@ public class Regex {
      *  </ul>
      */
     public static final String ARG_SPLIT_REGEX = " ?(\\w+): (\\w+)";
-
 }
