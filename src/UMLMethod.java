@@ -6,20 +6,13 @@ public class UMLMethod {
     private final String name;
     private final String encapsulation;
 
-    private ArrayList<String> argsNames = new ArrayList<>();
-    private ArrayList<String> argsTypes = new ArrayList<>();
+    private final ArrayList<String> argsNames = new ArrayList<>();
+    private final ArrayList<String> argsTypes = new ArrayList<>();
 
     public UMLMethod(String line, String className) {
 
         //First, format it nicely
 
-        /**
-         * Formatted line:
-         * EncapsulationIndicator;
-         * retunType("" for void);
-         * name;
-         * args in the UML format
-         */
         String formatted = line.replaceAll(Regex.METHOD_FIND_REGEX, "$1;$4;$2;$3");
         String[] parts = formatted.split(";");
         this.encapsulation = switch (parts[0]) {

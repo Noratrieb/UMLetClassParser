@@ -24,14 +24,6 @@ public class UMLClassView {
 
     public UMLClassView() {
 
-        convertButton.addActionListener(e -> {
-            String text = inputArea.getText();
-
-            UMLClass umlClass = new UMLClass(text, "");
-
-            outputArea.setText(umlClass.toString());
-        });
-
         inputArea.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
