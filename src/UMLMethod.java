@@ -34,9 +34,9 @@ public class UMLMethod {
 
 
         if(parts[1].equals("") && !className.equals(name)){
-            this.returnType = "void";
+            this.returnType = "void ";
         } else {
-            this.returnType = parts[1];
+            this.returnType = parts[1] + " ";
         }
 
         if(parts.length == 4) {
@@ -57,7 +57,7 @@ public class UMLMethod {
     @Override
     public String toString() {
         StringBuilder returnString = new StringBuilder();
-        returnString.append("\n   ").append(encapsulation).append(returnType).append(" ").append(name).append(" (");
+        returnString.append("\n   ").append(encapsulation).append(returnType).append(name).append(" (");
 
         for (int i = 0; i < argsNames.size(); i++) {
             returnString.append(argsTypes.get(i)).append(" ").append(argsNames.get(i));
