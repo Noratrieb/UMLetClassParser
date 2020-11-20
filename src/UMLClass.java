@@ -52,8 +52,6 @@ public class UMLClass {
             for (UMLField field : fields) {
                 s.append(field.toString());
             }
-
-            s.append("\n");
         }
 
         if (methods.size() > 0) {

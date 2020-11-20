@@ -50,5 +50,5 @@ public class Regex {
      *     <li>2 The datatype</li>
      *  </ul>
      */
-    public static final String ARG_SPLIT_REGEX = " ?(\\w+): (\\w+)";
+    public static final String ARG_SPLIT_REGEX = " *(\\w+) *: *(\\w+)";
 }
