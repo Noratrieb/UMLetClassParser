@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class XMLParser {
 
     private Document doc;
+    private boolean valid;
 
     public XMLParser(String path) {
         try {
@@ -21,8 +22,8 @@ public class XMLParser {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             doc = builder.parse(inputFile);
-        } catch (ParserConfigurationException | SAXException | IOException e){
-            e.printStackTrace();
+            valid = true;
+        } catch (ParserConfigurationException | SAXException | IOException ignored){
         }
     }
 
@@ -30,20 +31,23 @@ public class XMLParser {
 
         ArrayList<String> classes = new ArrayList<>();
 
-        NodeList nList = doc.getDocumentElement().getElementsByTagName("element");
+        if(valid) {
 
-        for (int i = 0; i < nList.getLength(); i++) {
-            Node node = nList.item(i);
+            NodeList nList = doc.getDocumentElement().getElementsByTagName("element");
 
-            if (node.getNodeType() == Node.ELEMENT_NODE){
+            for (int i = 0; i < nList.getLength(); i++) {
+                Node node = nList.item(i);
 
-                Element element = (Element) node;
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
 
-                if(element.getElementsByTagName("id").item(0).getTextContent().equals("UMLClass")){
+                    Element element = (Element) node;
 
-                    String classBody = element.getElementsByTagName("panel_attributes").item(0).getTextContent();
-                    classes.add(classBody);
+                    if (element.getElementsByTagName("id").item(0).getTextContent().equals("UMLClass")) {
 
+                        String classBody = element.getElementsByTagName("panel_attributes").item(0).getTextContent();
+                        classes.add(classBody);
+
+                    }
                 }
             }
         }

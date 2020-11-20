@@ -15,7 +15,7 @@ public class UMLClass {
         String[] lines = classDiagram.split("\n");
 
         String[] linesBeheaded = new String[lines.length-1];
-        this.name = lines[0];
+        this.name = lines[0].split(" ")[0];
 
         System.arraycopy(lines, 1, linesBeheaded, 0, linesBeheaded.length);
 
