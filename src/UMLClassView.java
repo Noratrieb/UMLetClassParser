@@ -3,8 +3,6 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -13,7 +11,6 @@ import java.util.List;
 public class UMLClassView {
     private JTextArea inputArea;
     private JPanel panel1;
-    private JButton convertButton;
     private JTextArea outputArea;
     private JTextField pathField;
     private JButton convertFileButton;
@@ -39,14 +36,11 @@ public class UMLClassView {
             }
         });
 
-        convertFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String path = pathField.getText();
-                String packagePath = packagePathField.getText();
-                XMLParser parser = new XMLParser(path);
-                manager.parseClasses(parser.getClassesText(), packagePath);
-            }
+        convertFileButton.addActionListener(e -> {
+            String path = pathField.getText();
+            String packagePath = packagePathField.getText();
+            XMLParser parser = new XMLParser(path);
+            manager.parseClasses(parser.getClassesText(), packagePath);
         });
 
         pathField.setDropTarget(new DropTarget() {
