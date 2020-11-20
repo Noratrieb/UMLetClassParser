@@ -3,6 +3,8 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -15,6 +17,7 @@ public class UMLClassView {
     private JTextField pathField;
     private JButton convertFileButton;
     private JTextField packagePathField;
+    private JCheckBox watermarkBox;
 
     private UMLManager manager;
 
@@ -24,15 +27,11 @@ public class UMLClassView {
         inputArea.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                String text = inputArea.getText();
-                UMLClass umlClass = new UMLClass(text, "");
-                outputArea.setText(umlClass.toString());
+                refreshTextArea();
             }
             @Override
             public void keyReleased(KeyEvent e) {
-                String text = inputArea.getText();
-                UMLClass umlClass = new UMLClass(text, "");
-                outputArea.setText(umlClass.toString());
+                refreshTextArea();
             }
         });
 
@@ -62,6 +61,18 @@ public class UMLClassView {
                 }
             }
         });
+
+
+        watermarkBox.addActionListener(e -> {
+            manager.setShowWatermark(watermarkBox.isSelected());
+            refreshTextArea();
+        });
+    }
+
+    private void refreshTextArea(){
+        String text = inputArea.getText();
+        UMLClass umlClass = new UMLClass(text, "", manager);
+        outputArea.setText(umlClass.toString());
     }
 
     public JPanel getPanel1() {
@@ -70,5 +81,9 @@ public class UMLClassView {
 
     public void setManager(UMLManager manager) {
         this.manager = manager;
+    }
+
+    public boolean isWatermarkSelected(){
+        return watermarkBox.isSelected();
     }
 }

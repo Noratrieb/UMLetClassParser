@@ -5,10 +5,12 @@ import java.util.ArrayList;
 
 public class UMLManager {
 
-    UMLClassView view;
+    private UMLClassView view;
+    private boolean showWatermark;
 
     public UMLManager(UMLClassView view) {
         this.view = view;
+        this.showWatermark = view.isWatermarkSelected();
         view.setManager(this);
     }
 
@@ -20,7 +22,7 @@ public class UMLManager {
         ArrayList<UMLClass> classes = new ArrayList<>();
 
         for (String text : classesText) {
-            classes.add(new UMLClass(text, packageString));
+            classes.add(new UMLClass(text, packageString, this));
         }
 
         classes.forEach(e -> System.out.println(e.toString()));
@@ -37,5 +39,13 @@ public class UMLManager {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean isShowWatermark() {
+        return showWatermark;
+    }
+
+    public void setShowWatermark(boolean showWatermark) {
+        this.showWatermark = showWatermark;
     }
 }

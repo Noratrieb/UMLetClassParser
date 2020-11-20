@@ -50,7 +50,7 @@ public class UMLMethod {
     @Override
     public String toString() {
         StringBuilder returnString = new StringBuilder();
-        returnString.append("\n   ").append(encapsulation).append(returnType).append(name).append(" (");
+        returnString.append("   ").append(encapsulation).append(returnType).append(name).append(" (");
 
         for (int i = 0; i < argsNames.size(); i++) {
             returnString.append(argsTypes.get(i)).append(" ").append(argsNames.get(i));
