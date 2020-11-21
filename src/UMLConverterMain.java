@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 /**
- * Stars the UMLetClassParser
+ * Starts the UMLetClassParser
  */
 public class UMLConverterMain {
 
