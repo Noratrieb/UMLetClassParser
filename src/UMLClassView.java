@@ -21,7 +21,9 @@ public class UMLClassView {
 
     private UMLManager manager;
 
-
+    /**
+     * Creates the GUI for the application
+     */
     public UMLClassView() {
 
         inputArea.addKeyListener(new KeyAdapter() {

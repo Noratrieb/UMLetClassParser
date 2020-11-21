@@ -11,6 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Opens a UMLet XML file and parses its content to an ArrayList of Type String containing all UML class texts
+ */
 public class XMLParser {
 
     private Document doc;
@@ -27,26 +30,25 @@ public class XMLParser {
         }
     }
 
+    /**
+     * Get all classes from a UMLet XML file
+     * @return an ArrayList of Type String containing all UML classes in their text form
+     */
     public ArrayList<String> getClassesText(){
 
         ArrayList<String> classes = new ArrayList<>();
-
         if(valid) {
-
             NodeList nList = doc.getDocumentElement().getElementsByTagName("element");
 
-            for (int i = 0; i < nList.getLength(); i++) {
-                Node node = nList.item(i);
+            for (int i = 0; i < nList.getLength(); i++) { Node node = nList.item(i);
 
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element element = (Element) node;
 
                     if (element.getElementsByTagName("id").item(0).getTextContent().equals("UMLClass")) {
-
                         String classBody = element.getElementsByTagName("panel_attributes").item(0).getTextContent();
                         classes.add(classBody);
-
                     }
                 }
             }

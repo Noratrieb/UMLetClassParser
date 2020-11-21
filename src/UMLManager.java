@@ -3,6 +3,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Manages everything about the parsing
+ */
 public class UMLManager {
 
     private UMLClassView view;
@@ -14,6 +17,11 @@ public class UMLManager {
         view.setManager(this);
     }
 
+    /**
+     * Converts the class text into compilable Java files at the package destination containing the code
+     * @param classesText An ArrayList of Type String containing all classes in UML text represantation
+     * @param packagePath The path to the package where the classes should be stored to
+     */
     public void parseClasses(ArrayList<String> classesText, String packagePath) {
 
         String packageString = packagePath.replaceAll(".*src\\\\(.*)", "$1");

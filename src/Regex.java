@@ -1,4 +1,10 @@
-public class Regex {
+import java.util.regex.Pattern;
+
+/**
+ * Contains all Regex
+ */
+public abstract class Regex {
+
 
     /**
      * Matches any method in the UML format, including a constructor
@@ -19,11 +25,11 @@ public class Regex {
      *  </ul>
      *
      */
-    public static final String METHOD_FIND_REGEX = " *(?<capsule>[+\\-~#]) *(?<name>\\w+) *\\( *(?<args>(?: *\\w+ *: *\\w+ *,? *)*) *\\) *(?:: *(?<return>\\w+))?";
+    public static final Pattern METHOD_FIND_REGEX = Pattern.compile(" *(?<capsule>[+\\-~#]) *(?<name>\\w+) *\\( *(?<args>(?: *\\w+ *: *\\w+ *,? *)*) *\\) *(?:: *(?<return>\\w+))?");
 
     /**
      * Matches any Field in the UML format, including a constructor
-     *
+     *y
      * <p>Examples:</p>
      * <ul>
      *     <li>- age: int</li>
@@ -39,7 +45,7 @@ public class Regex {
      *  </ul>
      *
      */
-    public static final String FIELD_FIND_REGEX = " *(?<capsule>[+\\-~#]) *(?<name>\\w+) *: *(?<type>\\w+)";
+    public static final Pattern FIELD_FIND_REGEX = Pattern.compile(" *(?<capsule>[+\\-~#]) *(?<name>\\w+) *: *(?<type>\\w+)");
 
     /**
      * Matches a single arg in a method
@@ -50,5 +56,5 @@ public class Regex {
      *     <li>2 The datatype</li>
      *  </ul>
      */
-    public static final String ARG_SPLIT_REGEX = " *(\\w+) *: *(\\w+)";
+    public static final Pattern ARG_SPLIT_REGEX = Pattern.compile(" *(\\w+) *: *(\\w+)");
 }

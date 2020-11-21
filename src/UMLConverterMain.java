@@ -1,5 +1,8 @@
 import javax.swing.*;
 
+/**
+ * Stars the UMLetClassParser
+ */
 public class UMLConverterMain {
 
     public static void main(String[] args) {

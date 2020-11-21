@@ -1,3 +1,6 @@
+/**
+ * Stores all information about a field in a class and converts it into Java code using the {@link #toString()} method
+ */
 public class UMLField {
 
     private final String dataType;
@@ -6,12 +9,6 @@ public class UMLField {
 
     private boolean valid;
 
-    public UMLField(String dataType, String name, String encapsulation) {
-        this.dataType = dataType;
-        this.name = name;
-        this.encapsulation = encapsulation;
-    }
-
     /**
      * New Field from UML line
      *
@@ -19,7 +16,7 @@ public class UMLField {
      */
     public UMLField(String line) {
 
-        String formatted = line.replaceAll(Regex.FIELD_FIND_REGEX, "$1;$3;$2");
+        String formatted = line.replaceAll(Regex.FIELD_FIND_REGEX.pattern(), "$1;$3;$2");
         String[] formattedSplit = formatted.split(";");
 
         this.encapsulation = switch (formattedSplit[0]) {
@@ -34,7 +31,10 @@ public class UMLField {
         this.dataType = formattedSplit[1];
     }
 
-
+    /**
+     * Returns the field as the Java code representation
+     * @return The field as the Java code representation
+     */
     @Override
     public String toString() {
         return "   " + encapsulation + dataType + " " + name + ";\n";

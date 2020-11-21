@@ -1,4 +1,6 @@
+import javax.print.DocFlavor;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class UMLClass {
 
@@ -11,6 +13,13 @@ public class UMLClass {
 
     private UMLManager manager;
 
+    /**
+     * Contains all information about a Java class loaded from a UMLet XML file
+     * Use the {@link #toString()} method to get the class as compilable, valid Java Code
+     * @param classDiagram
+     * @param packageString
+     * @param manager
+     */
     public UMLClass(String classDiagram, String packageString, UMLManager manager) {
 
         this.manager = manager;
@@ -26,15 +35,19 @@ public class UMLClass {
 
         for (String line : linesBeheaded) {
             if (line != null) {
-                if (line.matches(Regex.METHOD_FIND_REGEX)) {  //MATCHES METHOD
+                if (line.matches(Regex.METHOD_FIND_REGEX.pattern())) {  //MATCHES METHOD
                     methods.add(new UMLMethod(line, name));
-                } else if (line.matches(Regex.FIELD_FIND_REGEX)) { //MATCHES FIELD
+                } else if (line.matches(Regex.FIELD_FIND_REGEX.pattern())) { //MATCHES FIELD
                     fields.add(new UMLField(line));
                 }
             }
         }
     }
 
+    /**
+     * Returns the class as compilable Java code
+     * @return The class as compilable Java code
+     */
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();

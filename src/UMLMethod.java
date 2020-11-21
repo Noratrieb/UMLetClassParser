@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Stores all information about a method in a class and converts it into Java code using the {@link #toString()} method
+ */
 public class UMLMethod {
 
     private final String returnType;
@@ -9,11 +12,17 @@ public class UMLMethod {
     private final ArrayList<String> argsNames = new ArrayList<>();
     private final ArrayList<String> argsTypes = new ArrayList<>();
 
+    /**
+     * Create a new method/constructor from the UML representation of that method
+     *
+     * @param line      The line in the UML diagram
+     * @param className The name of the class
+     */
     public UMLMethod(String line, String className) {
 
         //First, format it nicely
 
-        String formatted = line.replaceAll(Regex.METHOD_FIND_REGEX, "$1;$4;$2;$3");
+        String formatted = line.replaceAll(Regex.METHOD_FIND_REGEX.pattern(), "$1;$4;$2;$3");
         String[] parts = formatted.split(";");
         this.encapsulation = switch (parts[0]) {
             case "+" -> "public ";
@@ -26,19 +35,19 @@ public class UMLMethod {
         this.name = parts[2];
 
 
-        if(parts[1].equals("") && !className.equals(name)){
+        if (parts[1].equals("") && !className.equals(name)) {
             this.returnType = "void ";
         } else {
             this.returnType = parts[1] + " ";
         }
 
-        if(parts.length == 4) {
+        if (parts.length == 4) {
             String args = parts[3];
             String[] argsSplit = args.split(",");
 
             for (String s : argsSplit) {
-                if(s.matches(Regex.ARG_SPLIT_REGEX)) {
-                    String argFormatted = s.replaceAll(Regex.ARG_SPLIT_REGEX, "$1;$2");
+                if (s.matches(Regex.ARG_SPLIT_REGEX.pattern())) {
+                    String argFormatted = s.replaceAll(Regex.ARG_SPLIT_REGEX.pattern(), "$1;$2");
                     String[] formattedSplit = argFormatted.split(";");
                     argsNames.add(formattedSplit[0]);
                     argsTypes.add(formattedSplit[1]);
@@ -47,6 +56,12 @@ public class UMLMethod {
         }
     }
 
+
+    /**
+     * Returns the method as the Java code representation
+     *
+     * @return The method as the Java code representation
+     */
     @Override
     public String toString() {
         StringBuilder returnString = new StringBuilder();
