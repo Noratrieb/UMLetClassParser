@@ -71,9 +71,18 @@ public class UMLClass {
             for (UMLMethod method : methods) {
                 s.append(method.toString());
             }
-
-            s.append("}");
         }
+
+        if(manager.isGetSetAuto()){
+            System.out.println("hallo");
+            for(UMLField field : fields){
+                s.append(field.getter());
+                s.append(field.setter());
+            }
+        }
+
+        s.append("}");
+
 
         return s.toString();
     }

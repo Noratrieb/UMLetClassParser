@@ -10,10 +10,12 @@ public class UMLManager {
 
     private UMLClassView view;
     private boolean showWatermark;
+    private boolean getSetAuto;
 
     public UMLManager(UMLClassView view) {
         this.view = view;
         this.showWatermark = view.isWatermarkSelected();
+        this.getSetAuto = view.isGetSetAutoSelected();
         view.setManager(this);
     }
 
@@ -55,5 +57,13 @@ public class UMLManager {
 
     public void setShowWatermark(boolean showWatermark) {
         this.showWatermark = showWatermark;
+    }
+
+    public void setGetSetAuto(boolean getSetAuto) {
+        this.getSetAuto = getSetAuto;
+    }
+
+    public boolean isGetSetAuto() {
+        return getSetAuto;
     }
 }

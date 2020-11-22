@@ -40,4 +40,24 @@ public class UMLField {
         return "   " + encapsulation + dataType + " " + name + ";\n";
 
     }
+
+    public String setter() {
+        String nameCapital = name.toUpperCase();
+        String nameCC = "set" + nameCapital.charAt(0) + name.substring(1);
+        UMLMethod setter = new UMLMethod("void ", nameCC, "public ");
+        setter.addArg(name, dataType);
+        setter.addBodyLine("this." + name + " = " + name + ";");
+
+        return setter.toString();
+    }
+
+    public String getter() {
+
+        String nameCapital = name.toUpperCase();
+        String nameCC = "get" + nameCapital.charAt(0) + name.substring(1);
+        UMLMethod setter = new UMLMethod(dataType + " ", nameCC, "public ");
+        setter.addBodyLine("return " + name + ";");
+
+        return setter.toString();
+    }
 }

@@ -12,6 +12,8 @@ public class UMLMethod {
     private final ArrayList<String> argsNames = new ArrayList<>();
     private final ArrayList<String> argsTypes = new ArrayList<>();
 
+    private String methodBody = "";
+
     /**
      * Create a new method/constructor from the UML representation of that method
      *
@@ -56,6 +58,11 @@ public class UMLMethod {
         }
     }
 
+    public UMLMethod(String returnType, String name, String encapsulation) {
+        this.returnType = returnType;
+        this.name = name;
+        this.encapsulation = encapsulation;
+    }
 
     /**
      * Returns the method as the Java code representation
@@ -74,8 +81,23 @@ public class UMLMethod {
             }
         }
 
-        returnString.append(") {\n   \n   }\n");
+        returnString.append(") {\n   ");
+        returnString.append(methodBody);
+        returnString.append("\n   }\n");
 
         return returnString.toString();
+    }
+
+    public void addArg(String name, String dataType) {
+        argsNames.add(name);
+        argsTypes.add(dataType);
+    }
+
+    public void addBodyLine(String line){
+        if(methodBody.contains("\n")) {
+            methodBody += "\n   " + line;
+        } else {
+            methodBody += "   " + line;
+        }
     }
 }
