@@ -88,13 +88,23 @@ public class UMLMethod {
         return returnString.toString();
     }
 
+    /**
+     * Add an argument to the method
+     *
+     * @param name     The name of the variable
+     * @param dataType The type
+     */
     public void addArg(String name, String dataType) {
         argsNames.add(name);
         argsTypes.add(dataType);
     }
 
-    public void addBodyLine(String line){
-        if(methodBody.contains("\n")) {
+    /**
+     * Add a line to the method body
+     * @param line The line (not containing any linebreaks)
+     */
+    public void addBodyLine(String line) {
+        if (methodBody.contains("\n")) {
             methodBody += "\n   " + line;
         } else {
             methodBody += "   " + line;

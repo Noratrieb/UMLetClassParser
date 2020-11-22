@@ -41,6 +41,11 @@ public class UMLField {
 
     }
 
+    /**
+     * Generate a Setter Method for this field
+     *
+     * @return The Setter Method as a String
+     */
     public String setter() {
         String nameCapital = name.toUpperCase();
         String nameCC = "set" + nameCapital.charAt(0) + name.substring(1);
@@ -51,6 +56,11 @@ public class UMLField {
         return setter.toString();
     }
 
+    /**
+     * Generate a Getter Method for this field
+     *
+     * @return The Getter Method as a String
+     */
     public String getter() {
 
         String nameCapital = name.toUpperCase();
