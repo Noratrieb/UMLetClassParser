@@ -47,8 +47,7 @@ public class UMLField {
      * @return The Setter Method as a String
      */
     public String setter() {
-        String nameCapital = name.toUpperCase();
-        String nameCC = "set" + nameCapital.charAt(0) + name.substring(1);
+        String nameCC = "set" + name.toUpperCase().charAt(0) + name.substring(1);
         UMLMethod setter = new UMLMethod("void ", nameCC, "public ");
         setter.addArg(name, dataType);
         setter.addBodyLine("this." + name + " = " + name + ";");
@@ -62,9 +61,7 @@ public class UMLField {
      * @return The Getter Method as a String
      */
     public String getter() {
-
-        String nameCapital = name.toUpperCase();
-        String nameCC = "get" + nameCapital.charAt(0) + name.substring(1);
+        String nameCC = "get" + name.toUpperCase().charAt(0) + name.substring(1);
         UMLMethod setter = new UMLMethod(dataType + " ", nameCC, "public ");
         setter.addBodyLine("return " + name + ";");
 

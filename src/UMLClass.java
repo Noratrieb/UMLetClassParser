@@ -74,7 +74,6 @@ public class UMLClass {
         }
 
         if(manager.isGetSetAuto()){
-            System.out.println("hallo");
             for(UMLField field : fields){
                 s.append(field.getter());
                 s.append(field.setter());
