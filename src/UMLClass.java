@@ -36,7 +36,7 @@ public class UMLClass {
         for (String line : linesBeheaded) {
             if (line != null) {
                 if (line.matches(Regex.METHOD_FIND_REGEX.pattern())) {  //MATCHES METHOD
-                    methods.add(new UMLMethod(line, name));
+                    methods.add(new UMLMethod(line, name, manager));
                 } else if (line.matches(Regex.FIELD_FIND_REGEX.pattern())) { //MATCHES FIELD
                     fields.add(new UMLField(line));
                 }

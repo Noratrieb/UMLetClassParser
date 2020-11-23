@@ -11,11 +11,13 @@ public class UMLManager {
     private UMLClassView view;
     private boolean showWatermark;
     private boolean getSetAuto;
+    private boolean autoFillConstructor;
 
     public UMLManager(UMLClassView view) {
         this.view = view;
         this.showWatermark = view.isWatermarkSelected();
         this.getSetAuto = view.isGetSetAutoSelected();
+        this.autoFillConstructor = view.isAutoConstructorSelected();
         view.setManager(this);
     }
 
@@ -65,5 +67,13 @@ public class UMLManager {
 
     public boolean isGetSetAuto() {
         return getSetAuto;
+    }
+
+    public boolean isAutoFillConstructor(){
+        return autoFillConstructor;
+    }
+
+    public void setAutoGenerateConstructor(boolean selected) {
+        autoFillConstructor = selected;
     }
 }

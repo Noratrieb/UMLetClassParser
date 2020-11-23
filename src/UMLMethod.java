@@ -12,6 +12,10 @@ public class UMLMethod {
     private final ArrayList<String> argsNames = new ArrayList<>();
     private final ArrayList<String> argsTypes = new ArrayList<>();
 
+    private boolean isConstructor;
+
+    private UMLManager manager;
+
     private String methodBody = "";
 
     /**
@@ -20,7 +24,9 @@ public class UMLMethod {
      * @param line      The line in the UML diagram
      * @param className The name of the class
      */
-    public UMLMethod(String line, String className) {
+    public UMLMethod(String line, String className, UMLManager manager) {
+
+        this.manager = manager;
 
         //First, format it nicely
 
@@ -36,8 +42,11 @@ public class UMLMethod {
 
         this.name = parts[2];
 
+        if(className.equals(name)){
+            isConstructor = true;
+        }
 
-        if (parts[1].equals("") && !className.equals(name)) {
+        if (parts[1].equals("") && !isConstructor) {
             this.returnType = "void ";
         } else {
             this.returnType = parts[1] + " ";
@@ -82,6 +91,13 @@ public class UMLMethod {
         }
 
         returnString.append(") {\n   ");
+
+        if(isConstructor && manager.isAutoFillConstructor()){
+            for (String argsName : argsNames) {
+                addBodyLine("this." + argsName + " = " + argsName + ";");
+            }
+        }
+
         returnString.append(methodBody);
         returnString.append("\n   }\n");
 

@@ -19,6 +19,7 @@ public class UMLClassView {
     private JTextField packagePathField;
     private JCheckBox watermarkBox;
     private JCheckBox generateGetSetButton;
+    private JCheckBox autoFillConstructor;
 
     private UMLManager manager;
 
@@ -78,6 +79,13 @@ public class UMLClassView {
                 refreshTextArea();
             }
         });
+        autoFillConstructor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manager.setAutoGenerateConstructor(autoFillConstructor.isSelected());
+                refreshTextArea();
+            }
+        });
     }
 
     private void refreshTextArea(){
@@ -100,5 +108,9 @@ public class UMLClassView {
 
     public boolean isGetSetAutoSelected() {
         return generateGetSetButton.isSelected();
+    }
+
+    public boolean isAutoConstructorSelected() {
+        return autoFillConstructor.isSelected();
     }
 }
