@@ -32,13 +32,17 @@ public class UMLMethod {
 
         String formatted = line.replaceAll(Regex.METHOD_FIND_REGEX.pattern(), "$1;$4;$2;$3");
         String[] parts = formatted.split(";");
-        this.encapsulation = switch (parts[0]) {
-            case "+" -> "public ";
-            case "-" -> "private ";
-            case "#" -> "protected ";
-            case "~" -> "";
-            default -> "[undefined] ";
-        };
+        if(!manager.isIgnoreEcapsulation()) {
+            this.encapsulation = switch (parts[0]) {
+                case "+" -> "public ";
+                case "-" -> "private ";
+                case "#" -> "protected ";
+                case "~" -> "";
+                default -> "[undefined] ";
+            };
+        } else {
+            this.encapsulation = UMLManager.DEFAULT_ENCAPSULATION;
+        }
 
         this.name = parts[2];
 

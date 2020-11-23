@@ -7,6 +7,8 @@ public class UMLField {
     private final String name;
     private final String encapsulation;
 
+    private UMLManager manager;
+
     private boolean valid;
 
     /**
@@ -14,18 +16,24 @@ public class UMLField {
      *
      * @param line Format: "- name: String"
      */
-    public UMLField(String line) {
+    public UMLField(String line, UMLManager manager) {
+        this.manager = manager;
 
-        String formatted = line.replaceAll(Regex.FIELD_FIND_REGEX.pattern(), "$1;$3;$2");
+        String formatted = line.replaceAll(Regex.getFieldPattern(manager.isIgnoreEcapsulation()), "$1;$3;$2");
         String[] formattedSplit = formatted.split(";");
 
-        this.encapsulation = switch (formattedSplit[0]) {
-            case "+" -> "public ";
-            case "-" -> "private ";
-            case "#" -> "protected ";
-            case "~" -> "";
-            default -> "[undefined] ";
-        };
+        if(!manager.isIgnoreEcapsulation()) {
+            System.out.println("not ignore");
+            this.encapsulation = switch (formattedSplit[0]) {
+                case "+" -> "public ";
+                case "-" -> "private ";
+                case "#" -> "protected ";
+                case "~" -> "";
+                default -> "[undefined] ";
+            };
+        } else {
+            this.encapsulation = UMLManager.DEFAULT_ENCAPSULATION;
+        }
 
         this.name = formattedSplit[2];
         this.dataType = formattedSplit[1];

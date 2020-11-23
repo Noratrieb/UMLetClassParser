@@ -8,10 +8,12 @@ import java.util.ArrayList;
  */
 public class UMLManager {
 
+    public static String DEFAULT_ENCAPSULATION = "";
     private UMLClassView view;
     private boolean showWatermark;
     private boolean getSetAuto;
     private boolean autoFillConstructor;
+    private boolean ignoreEcapsulation;
 
     public UMLManager(UMLClassView view) {
         this.view = view;
@@ -75,5 +77,17 @@ public class UMLManager {
 
     public void setAutoGenerateConstructor(boolean selected) {
         autoFillConstructor = selected;
+    }
+
+    public boolean isIgnoreEcapsulation() {
+        return ignoreEcapsulation;
+    }
+
+    public void setIgnoreEcapsulation(boolean ignoreEcapsulation) {
+        this.ignoreEcapsulation = ignoreEcapsulation;
+    }
+
+    public static void setDefaultEncapsulation(String defaultEncapsulation) {
+        DEFAULT_ENCAPSULATION = defaultEncapsulation;
     }
 }

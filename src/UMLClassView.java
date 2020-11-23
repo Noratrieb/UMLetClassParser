@@ -18,8 +18,10 @@ public class UMLClassView {
     private JButton convertFileButton;
     private JTextField packagePathField;
     private JCheckBox watermarkBox;
-    private JCheckBox generateGetSetButton;
-    private JCheckBox autoFillConstructor;
+    private JCheckBox generateGetSetBox;
+    private JCheckBox autoFillConstructorBox;
+    private JCheckBox ignoreEncapsulationBox;
+    private JTextField defaultEncapsulationField;
 
     private UMLManager manager;
 
@@ -72,18 +74,43 @@ public class UMLClassView {
             refreshTextArea();
         });
 
-        generateGetSetButton.addActionListener(new ActionListener() {
+        generateGetSetBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                manager.setGetSetAuto(generateGetSetButton.isSelected());
+                manager.setGetSetAuto(generateGetSetBox.isSelected());
                 refreshTextArea();
             }
         });
-        autoFillConstructor.addActionListener(new ActionListener() {
+        autoFillConstructorBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                manager.setAutoGenerateConstructor(autoFillConstructor.isSelected());
+                manager.setAutoGenerateConstructor(autoFillConstructorBox.isSelected());
                 refreshTextArea();
+            }
+        });
+        ignoreEncapsulationBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manager.setIgnoreEcapsulation(ignoreEncapsulationBox.isSelected());
+                defaultEncapsulationField.setEnabled(ignoreEncapsulationBox.isSelected());
+                refreshTextArea();
+            }
+        });
+
+        defaultEncapsulationField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                UMLManager.setDefaultEncapsulation(defaultEncapsulationField.getText() + " ");
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                UMLManager.setDefaultEncapsulation(defaultEncapsulationField.getText() + " ");
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                UMLManager.setDefaultEncapsulation(defaultEncapsulationField.getText() + " ");
             }
         });
     }
@@ -107,10 +134,10 @@ public class UMLClassView {
     }
 
     public boolean isGetSetAutoSelected() {
-        return generateGetSetButton.isSelected();
+        return generateGetSetBox.isSelected();
     }
 
     public boolean isAutoConstructorSelected() {
-        return autoFillConstructor.isSelected();
+        return autoFillConstructorBox.isSelected();
     }
 }
