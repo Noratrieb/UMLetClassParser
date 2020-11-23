@@ -42,6 +42,7 @@ public class UMLMethod {
             };
         } else {
             this.encapsulation = UMLManager.DEFAULT_ENCAPSULATION;
+            System.out.println(UMLManager.DEFAULT_ENCAPSULATION);
         }
 
         this.name = parts[2];
@@ -94,7 +95,7 @@ public class UMLMethod {
             }
         }
 
-        returnString.append(") {\n   ");
+        returnString.append(") {\n");
 
         if(isConstructor && manager.isAutoFillConstructor()){
             for (String argsName : argsNames) {
@@ -124,10 +125,10 @@ public class UMLMethod {
      * @param line The line (not containing any linebreaks)
      */
     public void addBodyLine(String line) {
-        if (methodBody.contains("\n")) {
-            methodBody += "\n   " + line;
+        if (methodBody.equals("")) {
+            methodBody += "      " + line;
         } else {
-            methodBody += "   " + line;
+            methodBody += "\n      " + line;
         }
     }
 }

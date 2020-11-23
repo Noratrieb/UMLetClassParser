@@ -98,19 +98,11 @@ public class UMLClassView {
         });
 
         defaultEncapsulationField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                UMLManager.setDefaultEncapsulation(defaultEncapsulationField.getText() + " ");
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                UMLManager.setDefaultEncapsulation(defaultEncapsulationField.getText() + " ");
-            }
 
             @Override
             public void keyReleased(KeyEvent e) {
                 UMLManager.setDefaultEncapsulation(defaultEncapsulationField.getText() + " ");
+                refreshTextArea();
             }
         });
     }

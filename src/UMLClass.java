@@ -82,7 +82,6 @@ public class UMLClass {
 
         s.append("}");
 
-
         return s.toString();
     }
 
