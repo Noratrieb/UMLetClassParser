@@ -25,7 +25,7 @@ public abstract class Regex {
      *  </ul>
      *
      */
-    public static final Pattern METHOD_FIND_REGEX = Pattern.compile(" *(?<capsule>[+\\-~#]) *(?<name>\\w+) *\\( *(?<args>(?: *\\w+ *: *\\w+ *,? *)*) *\\) *(?:: *(?<return>\\w+))?");
+    public static final Pattern METHOD_FIND_REGEX = Pattern.compile(" *(?<capsule>[+\\-~#]) *(?<name>\\w+) *\\( *(?<args>(?: *\\w+ *: *[\\w<>]+ *,? *)*) *\\) *(?:: *(?<return>[\\w<>]+))?");
 
     /**
      * Matches any Field in the UML format, including a constructor
@@ -45,7 +45,7 @@ public abstract class Regex {
      *  </ul>
      *
      */
-    public static final Pattern FIELD_FIND_REGEX = Pattern.compile(" *(?<capsule>[+\\-~#]) *(?<name>\\w+) *: *(?<type>\\w+)");
+    public static final Pattern FIELD_FIND_REGEX = Pattern.compile(" *(?<capsule>[+\\-~#]) *(?<name>\\w+) *: *(?<type>[\\w<>]+)");
 
     /**
      * Matches a single arg in a method
@@ -58,9 +58,9 @@ public abstract class Regex {
      */
     public static final Pattern ARG_SPLIT_REGEX = Pattern.compile(" *(\\w+) *: *(\\w+)");
 
-    public static final Pattern FIELD_FIND_REGEX_NO_ENCAPSULATION = Pattern.compile(" *(?<capsule>[+\\-~#])* *(?<name>\\w+) *: *(?<type>\\w+)");
+    public static final Pattern FIELD_FIND_REGEX_NO_ENCAPSULATION = Pattern.compile(" *(?<capsule>[+\\-~#])* *(?<name>\\w+) *: *(?<type>[\\w<>]+)");
 
-    public static final Pattern METHOD_FIND_REGEX_NO_ENCAPSULATION = Pattern.compile(" *(?<capsule>[+\\-~#])* *(?<name>\\w+) *\\( *(?<args>(?: *\\w+ *: *\\w+ *,? *)*) *\\) *(?:: *(?<return>\\w+))?");
+    public static final Pattern METHOD_FIND_REGEX_NO_ENCAPSULATION = Pattern.compile(" *(?<capsule>[+\\-~#])* *(?<name>\\w+) *\\( *(?<args>(?: *\\w+ *: *[\\w<>]+ *,? *)*) *\\) *(?:: *(?<return>[\\w<>]+))?");
 
 
     public static String getMethodPattern(boolean encapsulation){
