@@ -41,8 +41,8 @@ public class UMLMethod {
                 default -> "[undefined] ";
             };
         } else {
-            this.encapsulation = UMLManager.DEFAULT_ENCAPSULATION;
-            System.out.println(UMLManager.DEFAULT_ENCAPSULATION);
+            this.encapsulation = manager.getDefaultEncapsulation();
+            System.out.println(manager.getDefaultEncapsulation());
         }
 
         this.name = parts[2];

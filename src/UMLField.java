@@ -32,7 +32,7 @@ public class UMLField {
                 default -> "[undefined] ";
             };
         } else {
-            this.encapsulation = UMLManager.DEFAULT_ENCAPSULATION;
+            this.encapsulation = manager.getDefaultEncapsulation();
         }
 
         this.name = formattedSplit[2];

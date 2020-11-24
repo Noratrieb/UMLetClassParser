@@ -101,7 +101,7 @@ public class UMLClassView {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                UMLManager.setDefaultEncapsulation(defaultEncapsulationField.getText() + " ");
+                manager.setDefaultEncapsulation(defaultEncapsulationField.getText() + " ");
                 refreshTextArea();
             }
         });

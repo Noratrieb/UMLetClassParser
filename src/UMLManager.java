@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class UMLManager {
 
-    public static String DEFAULT_ENCAPSULATION = "";
+    private String defaultEncapsulation = "";
     private UMLClassView view;
     private boolean showWatermark;
     private boolean getSetAuto;
@@ -87,7 +87,13 @@ public class UMLManager {
         this.ignoreEcapsulation = ignoreEcapsulation;
     }
 
-    public static void setDefaultEncapsulation(String defaultEncapsulation) {
-        DEFAULT_ENCAPSULATION = defaultEncapsulation;
+    public void setDefaultEncapsulation(String defaultEncapsulation) {
+        this.defaultEncapsulation = defaultEncapsulation;
     }
+
+    public String getDefaultEncapsulation() {
+        return defaultEncapsulation;
+    }
+
+
 }
