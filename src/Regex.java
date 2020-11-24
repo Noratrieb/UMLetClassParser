@@ -56,7 +56,7 @@ public abstract class Regex {
      *     <li>2 The datatype</li>
      *  </ul>
      */
-    public static final Pattern ARG_SPLIT_REGEX = Pattern.compile(" *(\\w+) *: *(\\w+)");
+    public static final Pattern ARG_SPLIT_REGEX = Pattern.compile(" *(\\w+) *: *([\\w<>]+)");
 
     public static final Pattern FIELD_FIND_REGEX_NO_ENCAPSULATION = Pattern.compile(" *(?<capsule>[+\\-~#])? *(?<name>\\w+) *: *(?<type>[\\w<>]+)");
 
