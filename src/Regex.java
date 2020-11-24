@@ -58,9 +58,9 @@ public abstract class Regex {
      */
     public static final Pattern ARG_SPLIT_REGEX = Pattern.compile(" *(\\w+) *: *(\\w+)");
 
-    public static final Pattern FIELD_FIND_REGEX_NO_ENCAPSULATION = Pattern.compile(" *(?<capsule>[+\\-~#])* *(?<name>\\w+) *: *(?<type>[\\w<>]+)");
+    public static final Pattern FIELD_FIND_REGEX_NO_ENCAPSULATION = Pattern.compile(" *(?<capsule>[+\\-~#])? *(?<name>\\w+) *: *(?<type>[\\w<>]+)");
 
-    public static final Pattern METHOD_FIND_REGEX_NO_ENCAPSULATION = Pattern.compile(" *(?<capsule>[+\\-~#])* *(?<name>\\w+) *\\( *(?<args>(?: *\\w+ *: *[\\w<>]+ *,? *)*) *\\) *(?:: *(?<return>[\\w<>]+))?");
+    public static final Pattern METHOD_FIND_REGEX_NO_ENCAPSULATION = Pattern.compile(" *(?<capsule>[+\\-~#])? *(?<name>\\w+) *\\( *(?<args>(?: *\\w+ *: *[\\w<>]+ *,? *)*) *\\) *(?:: *(?<return>[\\w<>]+))?");
 
 
     public static String getMethodPattern(boolean encapsulation){
