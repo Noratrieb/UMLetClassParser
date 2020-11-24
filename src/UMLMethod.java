@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Stores all information about a method in a class and converts it into Java code using the {@link #toString()} method
@@ -42,7 +43,6 @@ public class UMLMethod {
             };
         } else {
             this.encapsulation = manager.getDefaultEncapsulation();
-            System.out.println(manager.getDefaultEncapsulation());
         }
 
         this.name = parts[2];
