@@ -30,8 +30,13 @@ public class UMLManager {
      */
     public void parseClasses(ArrayList<String> classesText, String packagePath) {
 
-        String packageString = packagePath.replaceAll(".*src\\\\(.*)", "$1");
-        packageString = packageString.replaceAll("\\\\", ".");
+        String packageString;
+        if(packagePath.matches(".src\\\\.+")){
+            packageString = packagePath.replaceAll(".*src\\\\(.*)", "$1");
+            packageString = packageString.replaceAll("\\\\", ".");
+        } else {
+            packageString = "";
+        }
 
         ArrayList<UMLClass> classes = new ArrayList<>();
 
@@ -43,6 +48,7 @@ public class UMLManager {
 
         for (UMLClass c : classes) {
             try {
+                System.err.println(packagePath + "/" + c.getName() + ".java");
                 String path = packagePath + "/" + c.getName() + ".java";
                 FileWriter fw = new FileWriter(path);
                 BufferedWriter bw = new BufferedWriter(fw);

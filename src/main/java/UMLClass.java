@@ -16,9 +16,9 @@ public class UMLClass {
     /**
      * Contains all information about a Java class loaded from a UMLet XML file
      * Use the {@link #toString()} method to get the class as compilable, valid Java Code
-     * @param classDiagram
-     * @param packageString
-     * @param manager
+     * @param classDiagram The Class as UMLet text
+     * @param packageString The String of the package, "" for no package
+     * @param manager The UMLManager
      */
     public UMLClass(String classDiagram, String packageString, UMLManager manager) {
 
@@ -38,7 +38,7 @@ public class UMLClass {
             this.fullName = name;
         }
 
-        this.name = lines[0].split(" ")[0];
+        this.name = fullName.split(" ")[0];
 
         System.arraycopy(lines, 1, linesBeheaded, 0, linesBeheaded.length);
 

@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Stores all information about a method in a class and converts it into Java code using the {@link #toString()} method
@@ -31,7 +30,7 @@ public class UMLMethod {
         this.manager = manager;
 
         //check whether it's abstract
-        if(line.matches("/.+/")){
+        if (line.matches("/.+/")) {
             isAbstract = true;
             line = line.replaceAll("/(.+)/", "$1");
         } else {
@@ -41,7 +40,7 @@ public class UMLMethod {
         //First, format it nicely
         String formatted = line.replaceAll(Regex.METHOD_FIND_REGEX.pattern(), "$1;$4;$2;$3");
         String[] parts = formatted.split(";");
-        if(!manager.isIgnoreEcapsulation()) {
+        if (!manager.isIgnoreEcapsulation()) {
             this.encapsulation = switch (parts[0]) {
                 case "+" -> "public ";
                 case "-" -> "private ";
@@ -57,8 +56,11 @@ public class UMLMethod {
 
         isConstructor = className.equals(name);
 
+        //parts[1] = returnType
         if (parts[1].equals("") && !isConstructor) {
             this.returnType = "void ";
+        } else if (isConstructor) {
+            this.returnType = "";
         } else {
             this.returnType = parts[1] + " ";
         }
@@ -105,7 +107,7 @@ public class UMLMethod {
 
         returnString.append(")");
 
-        if(isAbstract){
+        if (isAbstract) {
             returnString.append(";\n\n");
         } else {
 
@@ -137,6 +139,7 @@ public class UMLMethod {
 
     /**
      * Add a line to the method body
+     *
      * @param line The line (not containing any linebreaks)
      */
     public void addBodyLine(String line) {
