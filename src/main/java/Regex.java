@@ -24,7 +24,7 @@ public abstract class Regex {
      *  </ul>
      *
      */
-    public static final Pattern METHOD_FIND_REGEX = Pattern.compile(" *(?<capsule>[+\\-~#])? *(?<name>\\w+) *\\( *(?<args>(?: *\\w+ *: *[\\w<>]+ *,? *)*) *\\) *(?:: *(?<return>[\\w<>]+))?");
+    public static final Pattern METHOD_FIND_REGEX = Pattern.compile("/? *(?<capsule>[+\\-~#])? *(?<name>\\w+) *\\( *(?<args>(?: *\\w+ *: *[\\w<>]+ *,? *)*) *\\) *(?:: *(?<return>[\\w<>]+))?/?");
 
 
     /**
@@ -46,7 +46,7 @@ public abstract class Regex {
      *  </ul>
      *
      */
-    public static final Pattern METHOD_FIND_REGEX_FORCE_ENCAPSULATION = Pattern.compile(" *(?<capsule>[+\\-~#]) *(?<name>\\w+) *\\( *(?<args>(?: *\\w+ *: *[\\w<>]+ *,? *)*) *\\) *(?:: *(?<return>[\\w<>]+))?");
+    public static final Pattern METHOD_FIND_REGEX_FORCE_ENCAPSULATION = Pattern.compile("/? *(?<capsule>[+\\-~#]) *(?<name>\\w+) *\\( *(?<args>(?: *\\w+ *: *[\\w<>]+ *,? *)*) *\\) *(?:: *(?<return>[\\w<>]+))?/?");
 
 
     /**

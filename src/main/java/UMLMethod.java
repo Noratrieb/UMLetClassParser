@@ -13,7 +13,8 @@ public class UMLMethod {
     private final ArrayList<String> argsNames = new ArrayList<>();
     private final ArrayList<String> argsTypes = new ArrayList<>();
 
-    private boolean isConstructor;
+    private final boolean isConstructor;
+    private final boolean isAbstract;
 
     private UMLManager manager;
 
@@ -29,8 +30,15 @@ public class UMLMethod {
 
         this.manager = manager;
 
-        //First, format it nicely
+        //check whether it's abstract
+        if(line.matches("/.+/")){
+            isAbstract = true;
+            line = line.replaceAll("/(.+)/", "$1");
+        } else {
+            isAbstract = false;
+        }
 
+        //First, format it nicely
         String formatted = line.replaceAll(Regex.METHOD_FIND_REGEX.pattern(), "$1;$4;$2;$3");
         String[] parts = formatted.split(";");
         if(!manager.isIgnoreEcapsulation()) {
@@ -47,9 +55,7 @@ public class UMLMethod {
 
         this.name = parts[2];
 
-        if(className.equals(name)){
-            isConstructor = true;
-        }
+        isConstructor = className.equals(name);
 
         if (parts[1].equals("") && !isConstructor) {
             this.returnType = "void ";
@@ -76,6 +82,8 @@ public class UMLMethod {
         this.returnType = returnType;
         this.name = name;
         this.encapsulation = encapsulation;
+        isConstructor = false;
+        isAbstract = false;
     }
 
     /**
@@ -86,7 +94,7 @@ public class UMLMethod {
     @Override
     public String toString() {
         StringBuilder returnString = new StringBuilder();
-        returnString.append("\n   ").append(encapsulation).append(returnType).append(name).append(" (");
+        returnString.append("\n   ").append(encapsulation).append(isAbstract ? "abstract " : "").append(returnType).append(name).append(" (");
 
         for (int i = 0; i < argsNames.size(); i++) {
             returnString.append(argsTypes.get(i)).append(" ").append(argsNames.get(i));
@@ -95,16 +103,23 @@ public class UMLMethod {
             }
         }
 
-        returnString.append(") {\n");
+        returnString.append(")");
 
-        if(isConstructor && manager.isAutoFillConstructor()){
-            for (String argsName : argsNames) {
-                addBodyLine("this." + argsName + " = " + argsName + ";");
+        if(isAbstract){
+            returnString.append(";\n\n");
+        } else {
+
+            returnString.append(" {\n");
+
+            if (isConstructor && manager.isAutoFillConstructor()) {
+                for (String argsName : argsNames) {
+                    addBodyLine("this." + argsName + " = " + argsName + ";");
+                }
             }
-        }
 
-        returnString.append(methodBody);
-        returnString.append("\n   }\n");
+            returnString.append(methodBody);
+            returnString.append("\n   }\n");
+        }
 
         return returnString.toString();
     }
