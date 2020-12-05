@@ -44,8 +44,6 @@ public class UMLManager {
             classes.add(new UMLClass(text, packageString, this));
         }
 
-        classes.forEach(e -> System.out.println(e.toString()));
-
         for (UMLClass c : classes) {
             try {
                 System.err.println(packagePath + "/" + c.getName() + ".java");

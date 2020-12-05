@@ -23,7 +23,6 @@ public class UMLField {
         String[] formattedSplit = formatted.split(";");
 
         if(!manager.isIgnoreEcapsulation()) {
-            System.out.println("not ignore");
             this.encapsulation = switch (formattedSplit[0]) {
                 case "+" -> "public ";
                 case "-" -> "private ";
