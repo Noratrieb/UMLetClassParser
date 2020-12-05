@@ -1,12 +1,12 @@
-import javax.print.DocFlavor;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 public class UMLClass {
 
     private final String name;
     private final String fullName;
     private final String packageString;
+
+    private final boolean isAbstract;
 
     private final ArrayList<UMLField> fields = new ArrayList<>();
     private final ArrayList<UMLMethod> methods = new ArrayList<>();
@@ -28,7 +28,16 @@ public class UMLClass {
         String[] lines = classDiagram.split("\n");
 
         String[] linesBeheaded = new String[lines.length - 1];
-        this.fullName = lines[0];
+
+        String name = lines[0];
+        if(name.matches("/.+/")){
+            isAbstract = true;
+            this.fullName = name.replaceAll("/(.+)/", "$1");
+        } else {
+            isAbstract = false;
+            this.fullName = name;
+        }
+
         this.name = lines[0].split(" ")[0];
 
         System.arraycopy(lines, 1, linesBeheaded, 0, linesBeheaded.length);
@@ -59,7 +68,7 @@ public class UMLClass {
         if (!packageString.equals("")) {
             s.append("package ").append(packageString).append(";\n\n");
         }
-        s.append("public class ").append(fullName).append(" {\n\n");
+        s.append("public ").append(isAbstract ? "abstract " : "").append("class ").append(fullName).append(" {\n\n");
 
         if (fields.size() > 0) {
             for (UMLField field : fields) {
